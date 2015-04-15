@@ -52,11 +52,50 @@ bash 'install_spark' do
   not_if { ::File.exists?(spark_path) }
 end
 
+
+cassandra_connector_path = File.join(spark_path, 'lib', 'cassandra')
+directory File.dirname(cassandra_connector_path) do
+  mode "0755"
+  owner spark_user
+  group spark_group
+  recursive true
+end
+
+bash 'install_cassandra_connector' do
+  cwd ::File.dirname(cassandra_connector_path)
+  code <<-EOH
+    rm *.jar
+
+    curl -L -o ivy-2.4.0.jar \
+    'http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar'
+
+    curl -L -o spark-cassandra-connector_2.10-1.2.0-rc3.jar \
+    'http://search.maven.org/remotecontent?filepath=com/datastax/spark/spark-cassandra-connector_2.10/1.2.0-rc3/spark-cassandra-connector_2.10-1.2.0-rc3.jar'
+
+    ivy () { java -jar ivy-2.4.0.jar -dependency $1 $2 $3 -retrieve "[artifact]-[revision](-[classifier]).[ext]"; }
+
+    ivy org.apache.cassandra cassandra-thrift 2.0.12
+    ivy com.datastax.cassandra cassandra-driver-core 2.1.5
+    ivy joda-time joda-time 2.7
+    ivy org.joda joda-convert 1.7
+
+    rm -rf *-{sources,javadoc}.jar
+  EOH
+end
+
 template "spark-env.sh" do
   mode "0644"
   owner "root"
   path File.join(spark_path, "conf", "spark-env.sh")
   variables :spark_env => node["spark"]["env"]
+end
+
+template "spark-defaults.conf" do
+  mode "0644"
+  owner spark_user
+  group spark_group
+  path File.join(spark_path, "conf", "spark-defaults.conf")
+  variables :connector_path => cassandra_connector_path
 end
 
 directory "#{spark_path}/.ssh" do

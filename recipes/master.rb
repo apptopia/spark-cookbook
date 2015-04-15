@@ -25,5 +25,5 @@ service "spark" do
   stop_command <<-BASH
     sudo -u '#{spark_user}' -- sh -c 'cd #{spark_path} && ./sbin/stop-all.sh'
   BASH
-  action :start
+  action [:enable, :start]
 end

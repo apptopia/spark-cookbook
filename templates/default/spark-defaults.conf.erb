@@ -1,0 +1,42 @@
+# Default system properties included when running spark-submit.
+# This is useful for setting default environmental settings.
+
+# Example:
+# spark.master                     spark://master:7077
+# spark.eventLog.enabled           true
+# spark.eventLog.dir               hdfs://namenode:8021/directory
+# spark.serializer                 org.apache.spark.serializer.KryoSerializer
+# spark.driver.memory              5g
+# spark.executor.extraJavaOptions  -XX:+PrintGCDetails -Dkey=value -Dnumbers="one two three"
+
+spark.serializer              org.apache.spark.serializer.KryoSerializer
+spark.driver.memory           512m
+
+spark.executor.extraClassPath <%= connector_path %>/cassandra-driver-core-2.1.5-javadoc.jar:\
+                              <%= connector_path %>/cassandra-driver-core-2.1.5-sources.jar:\
+                              <%= connector_path %>/cassandra-driver-core-2.1.5.jar:\
+                              <%= connector_path %>/cassandra-thrift-2.0.12-javadoc.jar:\
+                              <%= connector_path %>/cassandra-thrift-2.0.12-sources.jar:\
+                              <%= connector_path %>/cassandra-thrift-2.0.12.jar:\
+                              <%= connector_path %>/commons-codec-1.2.jar:\
+                              <%= connector_path %>/commons-lang3-3.1.jar:\
+                              <%= connector_path %>/commons-logging-1.1.1.jar:\
+                              <%= connector_path %>/guava-14.0.1.jar:\
+                              <%= connector_path %>/httpclient-4.2.5.jar:\
+                              <%= connector_path %>/httpcore-4.2.4.jar:\
+                              <%= connector_path %>/ivy-2.4.0.jar:\
+                              <%= connector_path %>/joda-convert-1.2.jar:\
+                              <%= connector_path %>/joda-convert-1.7-javadoc.jar:\
+                              <%= connector_path %>/joda-convert-1.7-sources.jar:\
+                              <%= connector_path %>/joda-convert-1.7.jar:\
+                              <%= connector_path %>/joda-time-2.7-javadoc.jar:\
+                              <%= connector_path %>/joda-time-2.7-sources.jar:\
+                              <%= connector_path %>/joda-time-2.7.jar:\
+                              <%= connector_path %>//Users/saaji/Projects/Apptopia/tinkerbell/spark/libthrift-0.9.1.jar:\
+                              <%= connector_path %>/lz4-1.2.0.jar:\
+                              <%= connector_path %>/metrics-core-3.0.2.jar:\
+                              <%= connector_path %>/netty-3.9.0.Final.jar:\
+                              <%= connector_path %>/slf4j-api-1.7.2.jar:\
+                              <%= connector_path %>/slf4j-api-1.7.5.jar:\
+                              <%= connector_path %>/snappy-java-1.0.5.jar:\
+                              <%= connector_path %>/spark-cassandra-connector_2.10-1.2.0-rc3.jar
