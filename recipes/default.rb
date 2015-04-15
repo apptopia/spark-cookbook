@@ -61,6 +61,15 @@ directory cassandra_connector_path do
   recursive true
 end
 
+job_deploy_path = File.join(spark_path, 'jobs')
+directory job_deploy_path do
+  mode "0755"
+  owner spark_user
+  group spark_group
+  recursive true
+end
+
+
 bash 'install_cassandra_connector' do
   cwd cassandra_connector_path
   code <<-EOH
