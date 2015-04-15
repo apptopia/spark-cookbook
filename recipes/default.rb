@@ -54,7 +54,7 @@ end
 
 
 cassandra_connector_path = File.join(spark_path, 'lib', 'cassandra')
-directory File.dirname(cassandra_connector_path) do
+directory cassandra_connector_path do
   mode "0755"
   owner spark_user
   group spark_group
@@ -62,7 +62,7 @@ directory File.dirname(cassandra_connector_path) do
 end
 
 bash 'install_cassandra_connector' do
-  cwd ::File.dirname(cassandra_connector_path)
+  cwd cassandra_connector_path
   code <<-EOH
     rm *.jar
 
