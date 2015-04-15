@@ -54,23 +54,11 @@ SPARK_PUBLIC_DNS="<%= @spark_env['spark_public_dns'] %>"
 <%- unless @spark_env['spark_classpath'].to_s.empty? -%>
 SPARK_CLASSPATH="<%= @spark_env['spark_classpath'] %>"
 <%- end -%>
-<%- unless @spark_env['spark_local_ip'].to_s.empty? -%>
-SPARK_LOCAL_IP="<%= @spark_env['spark_local_ip'] %>"
-<%- end -%>
-<%- unless @spark_env['spark_public_dns'].to_s.empty? -%>
-SPARK_PUBLIC_DNS="<%= @spark_env['spark_public_dns'] %>"
-<%- end -%>
-<%- unless @spark_env['spark_classpath'].to_s.empty? -%>
-SPARK_CLASSPATH="<%= @spark_env['spark_classpath'] %>"
-<%- end -%>
 <%- unless @spark_env['spark_local_dirs'].to_s.empty? -%>
 SPARK_LOCAL_DIRS="<%= @spark_env['spark_local_dirs'] %>"
 <%- end -%>
 <%- unless @spark_env['mesos_native_library'].to_s.empty? -%>
 MESOS_NATIVE_LIBRARY="<%= @spark_env['mesos_native_library'] %>"
-<%- end -%>
-<%- unless @spark_env['hadoop_conf_dir'].to_s.empty? -%>
-HADOOP_CONF_DIR="<%= @spark_env['hadoop_conf_dir'] %>"
 <%- end -%>
 <%- unless @spark_env['spark_executor_instances'].to_s.empty? -%>
 SPARK_EXECUTOR_INSTANCES="<%= @spark_env['spark_executor_instances'] %>"
@@ -128,7 +116,4 @@ SPARK_HISTORY_OPTS="<%= @spark_env['spark_history_opts'] %>"
 <%- end -%>
 <%- unless @spark_env['spark_daemon_java_opts'].to_s.empty? -%>
 SPARK_DAEMON_JAVA_OPTS="<%= @spark_env['spark_daemon_java_opts'] %>"
-<%- end -%>
-<%- unless @spark_env['spark_public_dns'].to_s.empty? -%>
-SPARK_PUBLIC_DNS="<%= @spark_env['spark_public_dns'] %>"
 <%- end -%>
