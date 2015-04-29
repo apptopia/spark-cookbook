@@ -1,17 +1,12 @@
 # Default system properties included when running spark-submit.
 # This is useful for setting default environmental settings.
 
-# Example:
-# spark.master                     spark://master:7077
-# spark.eventLog.enabled           true
-# spark.eventLog.dir               hdfs://namenode:8021/directory
-# spark.serializer                 org.apache.spark.serializer.KryoSerializer
-# spark.driver.memory              5g
-# spark.executor.extraJavaOptions  -XX:+PrintGCDetails -Dkey=value -Dnumbers="one two three"
-
 spark.serializer              org.apache.spark.serializer.KryoSerializer
 spark.driver.memory           1g
 spark.executor.memory         1g
+spark.local.dir               /mnt/scratch
+spark.eventLog.enabled        true
+spark.eventLog.dir            /mnt/scratch/spark-events
 
 spark.executor.extraClassPath <%= @connector_path %>/cassandra-driver-core-2.1.5-javadoc.jar:\
                               <%= @connector_path %>/cassandra-driver-core-2.1.5-sources.jar:\
